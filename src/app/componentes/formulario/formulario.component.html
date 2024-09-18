@@ -17,13 +17,13 @@
                         <label class="formulario-label">ID</label>
                     </div>
                     <div>
-                        <input type="text" id="id" name="id" class="formulario-inputs" required formControlName="id" [ngClass]="{ error_input: id.dirty && id.invalid }" />
+                        <input type="text" id="id" name="id" class="formulario-inputs" required formControlName="id" [ngClass]="{ error_input: id.dirty && id.invalid || productoExiste}" (input)="consultarProducto(id.value)" />
                     </div>
                     @if (id.dirty && id.value.length
                     <=0 ) { <span class="txt-rojo">* El id es necesario</span>
-                        } @if (id.invalid && id.dirty && id.value.length > 0) {
+                        } @if (id.invalid && id.dirty && id.value.length > 0 && !productoExiste) {
                         <span class="txt-rojo">* El id esta incorrecto (tiene que usar 3 a 10
-            caracteres)</span> }
+                    caracteres)</span> } @if (productoExiste) { <span class="txt-rojo">* El producto con este ID ya existe.</span> }
                 </div>
                 <div class="g-flex g-flex-column">
                     <div class="g-pb-4">
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="g-mt-16 g-flex g-justify-content-center g-gap-32">
-                <button type="button" class="btn btn-secundario" (click)="borrarFormulario()">
+                <button type="button" class="btn btn-secundario" (click)="borrarFormulario(txtBoton)">
           Reiniciar
         </button>
                 <button class="btn btn-principal" type="submit" [disabled]="formularioProducto.invalid">
