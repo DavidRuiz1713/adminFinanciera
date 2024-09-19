@@ -12,8 +12,6 @@ import { ProductosService } from '../../core/servicios/productos.service';
   styleUrl: './productos.component.less',
 })
 export default class ProductosComponent {
-  //Inyectamos el servicio
-  private productosService = inject(ProductosService);
   constructor(private router: Router) {}
   //Campos fijos que se usan en la tabla
   public campos: { titulo: string }[] = [

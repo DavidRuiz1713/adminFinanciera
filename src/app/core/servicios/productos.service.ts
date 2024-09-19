@@ -127,29 +127,11 @@ export class ProductosService {
       }),
     );
   }
-  // consultarIdProducto(id: string): Observable<boolean> {
-  //   const url = `http://localhost:3002/bp/products/verification/${id}`;
-  //   console.log('Respuesta dentro de tap:');
-  //   return this.httpClient.get<boolean>(url).pipe(
-  //     tap((response: boolean) => {
-  //       console.log('Respuesta dentro de tap:', response);
-  //       this.productSubject.next({
-  //         operacion: 'consulta',
-  //         mensaje: response ? 'Producto válido' : 'Producto no válido',
-  //         productoId: id,
-  //       });
-  //     }),
-  //     catchError((error) => {
-  //       console.error('Error al consultar:', error);
-  //       this.errorSubject.next(error.error.message);
-  //       return of(false);
-  //     }),
-  //     // finalize(() => {
-  //     //   console.log('Operación finalizada');
-  //     // }),
-  //   );
-  // }
-
+  /**
+   * Método que consulta si el id está repetido
+   * @param id
+   * @returns
+   */
   consultarIdProducto(id: string): Observable<boolean> {
     const url = `http://localhost:3002/bp/products/verification/${id}`;
     return this.httpClient.get<boolean>(url);
