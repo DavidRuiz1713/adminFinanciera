@@ -98,11 +98,11 @@
                             <img [src]="item.logo" alt="Logo del producto" class="logo-image" />
                         </div>
                         }@else {
-                        <p>Sin logo</p>
-                        }
+                        <app-logo-generico [texto]="item.name | letraInicial">
+                        </app-logo-generico> }
                     </td>
-                    <td>{{ item.name }}</td>
-                    <td class="td-descripcion__tamano">{{ item.description }}</td>
+                    <td>{{ item.name | titlecase }}</td>
+                    <td class="td-descripcion__tamano">{{ item.description | titlecase }}</td>
                     <td>{{ item.date_release | date: "yyyy-MM-dd " }}</td>
                     <td>{{ item.date_revision | date: "yyyy-MM-dd " }}</td>
                     <td>

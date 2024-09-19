@@ -1,3 +1,6 @@
+/**
+ * PIPE PARA CARGAR UNA IAMGEN GENÉRICA EN CASO DE QUE LA IMAGEN GENERADA FALLE
+ */
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -11,7 +14,5 @@ export class ValidarImagenPipe implements PipeTransform {
     img.src = value;
 
     return img.complete && img.naturalHeight !== 0;
-    // ? value
-    // : '../../../assets/iconos/circulo_gris.png';
   }
 }

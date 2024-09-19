@@ -9,6 +9,8 @@ import { MenuContextualComponent } from '../menu-contextual/menu-contextual.comp
 import { FormsModule } from '@angular/forms';
 import { NotificacionComponent } from '../notificacion/notificacion.component';
 import { ValidarImagenPipe } from '../../pipes/validar-imagen.pipe';
+import { LogoGenericoComponent } from '../logo-generico/logo-generico.component';
+import { LetraInicialPipe } from '../../pipes/letra-inicial.pipe';
 
 @Component({
   selector: 'app-tabla-productos',
@@ -19,6 +21,8 @@ import { ValidarImagenPipe } from '../../pipes/validar-imagen.pipe';
     MenuContextualComponent,
     FormsModule,
     NotificacionComponent,
+    LogoGenericoComponent,
+    LetraInicialPipe,
     ValidarImagenPipe,
   ],
   templateUrl: './tabla-productos.component.html',
