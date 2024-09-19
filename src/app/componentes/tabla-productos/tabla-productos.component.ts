@@ -8,6 +8,7 @@ import { DatosSeleccionadosService } from '../../core/servicios/datos-selecciona
 import { MenuContextualComponent } from '../menu-contextual/menu-contextual.component';
 import { FormsModule } from '@angular/forms';
 import { NotificacionComponent } from '../notificacion/notificacion.component';
+import { ValidarImagenPipe } from '../../pipes/validar-imagen.pipe';
 
 @Component({
   selector: 'app-tabla-productos',
@@ -18,6 +19,7 @@ import { NotificacionComponent } from '../notificacion/notificacion.component';
     MenuContextualComponent,
     FormsModule,
     NotificacionComponent,
+    ValidarImagenPipe,
   ],
   templateUrl: './tabla-productos.component.html',
   styleUrl: './tabla-productos.component.less',
