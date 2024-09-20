@@ -35,7 +35,7 @@ describe('TablaProductosComponent', () => {
         ProductosService,
         {
           provide: Router,
-          useValue: { navigate: jasmine.createSpy('navigate') },
+          useValue: { navigate: jest.fn() },
         },
       ],
     }).compileComponents();
@@ -45,9 +45,9 @@ describe('TablaProductosComponent', () => {
     productosService = TestBed.inject(ProductosService);
     datosSeleccionadosService = TestBed.inject(DatosSeleccionadosService);
     router = TestBed.inject(Router);
-    spyOn(productosService, 'obtenerTodosProductos').and.returnValue(
-      of(productosPrueba),
-    );
+    jest
+      .spyOn(productosService, 'obtenerTodosProductos')
+      .mockReturnValue(of(productosPrueba));
   });
 
   it('should create', () => {
@@ -71,15 +71,15 @@ describe('TablaProductosComponent', () => {
     component.mostrarYOcultarNotificacion();
     fixture.detectChanges();
 
-    expect(component.mostrarNotificacion).toBeTrue();
-    expect(component.ocultarNotificacion).toBeFalse();
+    expect(component.mostrarNotificacion).toBe(true);
+    expect(component.ocultarNotificacion).toBe(false);
 
     setTimeout(() => {
-      expect(component.ocultarNotificacion).toBeTrue();
+      expect(component.ocultarNotificacion).toBe(true);
     }, 3000);
 
     setTimeout(() => {
-      expect(component.mostrarNotificacion).toBeFalse();
+      expect(component.mostrarNotificacion).toBe(false);
       done();
     }, 4000);
   });

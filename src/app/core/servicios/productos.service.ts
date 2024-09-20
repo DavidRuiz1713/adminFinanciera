@@ -120,7 +120,6 @@ export class ProductosService {
         });
       }),
       catchError((error) => {
-        console.error('Error al eliminar:', error.error.message);
         const errorMessage = error.error;
         this.errorSubject.next(errorMessage.message);
         return of();

@@ -33,8 +33,8 @@ describe('NotificacionComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(component.mostrarNotificacion).toBeTrue();
-    expect(component.ocultarNotificacion).toBeFalse();
+    expect(component.mostrarNotificacion).toBe(true);
+    expect(component.ocultarNotificacion).toBe(false);
   });
 
   it('Esconde la notificacion si el tipo no es error', (done) => {
@@ -52,16 +52,16 @@ describe('NotificacionComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(component.mostrarNotificacion).toBeTrue();
-    expect(component.ocultarNotificacion).toBeFalse();
+    expect(component.mostrarNotificacion).toBe(true);
+    expect(component.ocultarNotificacion).toBe(false);
 
     setTimeout(() => {
-      expect(component.ocultarNotificacion).toBeTrue();
+      expect(component.ocultarNotificacion).toBe(true);
       done();
     }, 3000);
 
     setTimeout(() => {
-      expect(component.mostrarNotificacion).toBeTrue();
+      expect(component.mostrarNotificacion).toBe(true);
       done();
     }, 4000);
   });
@@ -81,14 +81,14 @@ describe('NotificacionComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(component.mostrarNotificacion).toBeTrue();
+    expect(component.mostrarNotificacion).toBe(true);
 
-    jasmine.clock().install();
-    jasmine.clock().tick(5000);
+    jest.useFakeTimers();
+    jest.advanceTimersByTime(5000);
 
-    expect(component.ocultarNotificacion).toBeFalse();
-    expect(component.mostrarNotificacion).toBeTrue();
+    expect(component.ocultarNotificacion).toBe(false);
+    expect(component.mostrarNotificacion).toBe(true);
 
-    jasmine.clock().uninstall();
+    jest.useRealTimers();
   });
 });

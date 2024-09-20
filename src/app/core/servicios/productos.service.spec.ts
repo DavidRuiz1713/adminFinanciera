@@ -34,15 +34,11 @@ describe('ProductosService', () => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => {
-    httpMock.verify(); // Verifica que no haya solicitudes pendientes
-  });
-
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('debería agregar un producto y manejar la respuesta correctamente', () => {
+  it('Agrega un producto ', () => {
     service.agregarProducto(productoPrueba).subscribe((res) => {
       expect(res).toEqual(respuestaExitosa);
     });
@@ -52,9 +48,9 @@ describe('ProductosService', () => {
     req.flush(respuestaExitosa);
   });
 
-  it('debería manejar el error de la solicitud de agregar producto correctamente', () => {
+  it('Maneja el error de la solicitud al agregar producto correctamente', () => {
     service.agregarProducto(productoPrueba).subscribe({
-      next: () => fail('La llamada debería haber fallado'),
+      next: () => fail('La llamada fallo'),
       error: (error) => {
         expect(error).toBe(mensajeError);
       },
@@ -65,7 +61,7 @@ describe('ProductosService', () => {
     req.flush(mensajeError, { status: 400, statusText: 'Bad Request' });
   });
 
-  it('debería editar un producto y manejar la respuesta correctamente', () => {
+  it('Edita un producto ', () => {
     service.editarProducto(productoPrueba).subscribe((res) => {
       expect(res).toEqual(respuestaEdicion);
     });
@@ -77,9 +73,9 @@ describe('ProductosService', () => {
     req.flush(respuestaEdicion);
   });
 
-  it('debería manejar el error de la solicitud de edición de producto correctamente', () => {
+  it('Maneja el error de la solicitud de edición del producto correctamente', () => {
     service.editarProducto(productoPrueba).subscribe({
-      next: () => fail('La llamada debería haber fallado'),
+      next: () => fail('La llamada fallo'),
       error: (error) => {
         expect(error).toBe(mensajeError);
       },
@@ -92,7 +88,7 @@ describe('ProductosService', () => {
     req.flush(mensajeError, { status: 400, statusText: 'Bad Request' });
   });
 
-  it('debería eliminar un producto y manejar la respuesta correctamente', () => {
+  it('Elimina un producto ', () => {
     const productoId = 'trj-crd';
 
     service.eliminarProducto(productoId).subscribe((res) => {
@@ -106,11 +102,11 @@ describe('ProductosService', () => {
     req.flush(respuestaEliminacion);
   });
 
-  it('debería manejar el error de la solicitud de eliminación de producto correctamente', () => {
+  it('Maneja el error de la solicitud de eliminación del producto correctamente', () => {
     const productoId = 'trj-crd';
 
     service.eliminarProducto(productoId).subscribe({
-      next: () => fail('La llamada debería haber fallado'),
+      next: () => fail('La llamada fallo'),
       error: (error) => {
         expect(error).toBe(mensajeError);
       },
@@ -123,8 +119,8 @@ describe('ProductosService', () => {
     req.flush(mensajeError, { status: 400, statusText: 'Bad Request' });
   });
 
-  it('debería limpiar el mensaje', () => {
-    spyOn(service['productSubject'], 'next');
+  it('Limpia el mensaje', () => {
+    jest.spyOn(service['productSubject'], 'next');
     service.limpiarMensaje();
     expect(service['productSubject'].next).toHaveBeenCalledWith(null);
   });

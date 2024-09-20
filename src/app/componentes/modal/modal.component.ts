@@ -33,6 +33,7 @@ export class ModalComponent {
   }
   ocultarModal() {
     this.modalVisible = false;
+    this.productosService.limpiarMensaje();
   }
   eliminarProducto() {
     this.productosService.eliminarProducto(this.id).subscribe((response) => {

@@ -86,6 +86,7 @@ export class FormularioComponent {
         );
       }
     });
+
     // Suscribirse a los errores del servicio
     this.productosService.error$.subscribe((error) => {
       if (typeof error === 'object' && error !== null && 'message' in error) {
@@ -160,5 +161,9 @@ export class FormularioComponent {
       this.formularioProducto.reset();
     }
     this.errorMessage = null;
+  }
+
+  hasChanges() {
+    return this.formularioProducto.pristine;
   }
 }
