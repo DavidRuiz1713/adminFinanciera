@@ -1,0 +1,127 @@
+<!-- Formulario dinamico el cual guarda o edita un producto dependiendo
+ de los datos que se le envien, muestra las validaciones de cada input permitiendo
+ o no avanzar con el flujo-->
+<div class="container-formulario">
+    <div class="g-text-align">
+        <h1>Formulario de Registro</h1>
+        <hr />
+    </div>
+    <div class="g-p-16">
+        <form action [formGroup]="formularioProducto" (ngSubmit)="agregarProducto(txtBoton)">
+            @if (errorMessage) {
+            <app-notificacion [texto]="errorMessage" tipo="error"></app-notificacion>
+            }
+            <div class="g-grid g-grid__columnx2 g-gap-16 g-mb-16 formulario-inputs__responsive">
+                <div class="g-flex g-flex-column">
+                    <div class="g-pb-4">
+                        <label class="formulario-label">ID</label>
+                    </div>
+                    <div>
+                        <input type="text" id="id" name="id" class="formulario-inputs" required formControlName="id" [ngClass]="{
+                error_input: (id.dirty && id.invalid) || productoExiste,
+              }" (input)="consultarProducto(id.value)" />
+                    </div>
+                    @if (id.dirty && id.value.length
+                    <=0 ) { <span class="txt-rojo">* El id es necesario</span>
+                        } @if ( id.invalid && id.dirty && id.value.length > 0 && !productoExiste ) {
+                        <span class="txt-rojo">* El id esta incorrecto (tiene que usar 3 a 10 caracteres)</span
+            >
+          }
+          @if (productoExiste) {
+            <span class="txt-rojo">* El producto con este ID ya existe.</span> }
+                </div>
+                <div class="g-flex g-flex-column">
+                    <div class="g-pb-4">
+                        <label class="formulario-label">Nombre</label>
+                    </div>
+                    <div>
+                        <input type="text" id="name" name="name" class="formulario-inputs" required formControlName="name" [ngClass]="{ error_input: name.dirty && name.invalid }" />
+                    </div>
+                    @if (name.dirty && name.value.length
+                    <=0 ) { <span class="txt-rojo">* El nombre es necesario</span>
+                        } @if (name.invalid && name.dirty && name.value.length > 0) {
+                        <span class="txt-rojo">* El nombre está incorrecto (tiene que usar 5 a 100
+              caracteres)</span
+            >
+          }
+        </div>
+      </div>
+      <div
+        class="g-grid g-grid__columnx2 g-gap-16 g-mb-16 formulario-inputs__responsive"
+      >
+        <div class="g-flex g-flex-column">
+          <div class="g-pb-4">
+            <label for class="formulario-label">Descripción</label>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              class="formulario-inputs"
+              required
+              formControlName="description"
+              [ngClass]="{
+                error_input: description.dirty && description.invalid,
+              }"
+            />
+          </div>
+          @if (description.dirty && description.value.length <= 0) {
+            <span class="txt-rojo">* La descripción es necesaria</span> } @if ( description.invalid && description.dirty && description.value.length > 0 ) {
+                        <span class="txt-rojo">* El descripción está incorrecta (tiene que usar 10 a 200
+              caracteres)</span
+            >
+          }
+        </div>
+        <div class="g-flex g-flex-column">
+          <div class="g-pb-4">
+            <label for class="formulario-label">Logo</label>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              class="formulario-inputs"
+              formControlName="logo"
+              [ngClass]="{ error_input: logo.dirty && logo.invalid }"
+              required
+            />
+          </div>
+          @if (logo.dirty && logo.value.length <= 0) {
+            <span class="txt-rojo">* El logo es necesario</span> }
+                </div>
+            </div>
+
+            <div class="g-grid g-grid__columnx2 g-gap-16 g-mb-32 formulario-inputs__responsive">
+                <div class="g-flex g-flex-column">
+                    <div class="g-pb-4">
+                        <label for class="formulario-label">Fecha Liberacion</label>
+                    </div>
+                    <div>
+                        <input type="date" id="description" name="description" required formControlName="date_release" class="formulario-date-input formulario-inputs" />
+                    </div>
+                    @if (date_release.dirty && date_release.value.length
+                    <=0 ) { <span class="txt-rojo">* la fecha de liberación es necesaria </span>
+                        }
+                </div>
+                <div class="g-flex g-flex-column">
+                    <div class="g-pb-4">
+                        <label for class="formulario-label">Fecha Revisión</label>
+                    </div>
+                    <div>
+                        <input type="date" id="date_revision" name="date_revision" formControlName="date_revision" class="formulario-date-input formulario-inputs" />
+                    </div>
+                </div>
+            </div>
+            <div class="g-mt-16 g-flex g-justify-content-center g-gap-32">
+                <button type="button" class="btn btn-secundario" (click)="borrarFormulario(txtBoton)">
+          Reiniciar
+        </button>
+                <button class="btn btn-principal" type="submit" [disabled]="formularioProducto.invalid || hasChanges()">
+          {{ txtBoton }}
+        </button>
+            </div>
+        </form>
+    </div>
+</div>
