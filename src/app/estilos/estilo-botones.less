@@ -1,28 +1,29 @@
-@import url(./estilo-colores.less);
+
 .btn {
-    padding: 12px;
-    font-size: 8px;
+    padding: @tam-12;
+    font-size: @tam-8;
 }
 
 .btn-principal {
-    color: #1111ae;
+    color: @g-azul;
     font-weight: bold;
     background: @g-amarillo;
     border: none;
     cursor: pointer;
 }
 
-.btn-principal:hover {
-    background-color: rgb(138, 138, 64);
+.btn-principal:not(:disabled):hover {
+    background-color: rgb(243, 233, 90);
     box-shadow: 0 0 5px rgb(138, 138, 64);
+    color: @g-negro;
 }
 
 .btn-principal:disabled {
     background-color: rgb(228, 228, 162);
+    cursor: not-allowed;
 }
-
 .btn-secundario {
-    color: #1111ae;
+    color: @g-azul;
     font-weight: bold;
     background: a8baf124;
     border: none;
